@@ -1,12 +1,21 @@
 "use client";
-
 import React, { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import docsData from "../data/docsData.json"; // Importing the JSON data
 
+// Define a type for the docsData structure
+interface DocsSection {
+  title: string;
+  content: string | string[];
+}
+
+interface DocsData {
+  [key: string]: DocsSection;
+}
+
 const DocsPage = () => {
-  const [activeSection, setActiveSection] = useState("intro");
+  const [activeSection, setActiveSection] = useState<string>("intro");
 
   // Function to handle active section change based on scroll
   const handleSectionChange = (entries: IntersectionObserverEntry[]) => {
@@ -59,7 +68,7 @@ const DocsPage = () => {
                     : "hover:text-yellow-400"
                 }`}
               >
-                {docsData[key].title}
+                {docsData[key as keyof DocsData].title}
                 {activeSection === key && (
                   <span className="absolute left-0 bottom-0 w-full h-1 bg-yellow-300 rounded-t-lg"></span>
                 )}
@@ -73,28 +82,32 @@ const DocsPage = () => {
           {Object.keys(docsData).map((key) => (
             <section key={key} id={key} className="mb-8">
               <h2 className="text-4xl font-semibold mb-4 text-gray-900">
-                {docsData[key].title}
+                {docsData[key as keyof DocsData].title}
               </h2>
               {key === "faq" ? (
                 <div className="space-y-4">
-                  {docsData[key].content.map((item, index) => (
-                    <div key={index}>
-                      <h3 className="font-semibold text-xl text-gray-800">
-                        {item.question}
-                      </h3>
-                      <p className="text-lg text-gray-700">{item.answer}</p>
-                    </div>
-                  ))}
+                  {docsData[key as keyof DocsData].content.map(
+                    (item, index) => (
+                      <div key={index}>
+                        <h3 className="font-semibold text-xl text-gray-800">
+                          {item.question}
+                        </h3>
+                        <p className="text-lg text-gray-700">{item.answer}</p>
+                      </div>
+                    )
+                  )}
                 </div>
-              ) : Array.isArray(docsData[key].content) ? (
+              ) : Array.isArray(docsData[key as keyof DocsData].content) ? (
                 <ul className="list-disc pl-6 text-lg text-gray-700 space-y-2">
-                  {docsData[key].content.map((item, index) => (
-                    <li key={index}>{item}</li>
-                  ))}
+                  {docsData[key as keyof DocsData].content.map(
+                    (item, index) => (
+                      <li key={index}>{item}</li>
+                    )
+                  )}
                 </ul>
               ) : (
                 <p className="text-lg text-gray-700 leading-relaxed">
-                  {docsData[key].content}
+                  {docsData[key as keyof DocsData].content}
                 </p>
               )}
             </section>
