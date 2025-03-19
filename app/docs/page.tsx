@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import docsData from "/Users/MZMRamzy/Desktop/cretera-rest_v1/nextjs_app/app/docs/docsData.json"; // Importing the JSON data
+import docsData from "../data/docsData.json"; // Importing the JSON data
 
 const DocsPage = () => {
   const [activeSection, setActiveSection] = useState("intro");
