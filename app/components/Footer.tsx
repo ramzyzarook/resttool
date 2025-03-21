@@ -15,7 +15,7 @@ export default function Footer() {
           <span className="text-neutral-light">|</span>
 
           {/* Right side image */}
-          <p className="text-neutral-light">cretera-rest 1.0</p>
+          <p className="text-neutral-light">certera-rest 1.0</p>
           {/* <div className="flex justify-end">
           <Image
             src="/logo.png" // Path relative to the public folder
