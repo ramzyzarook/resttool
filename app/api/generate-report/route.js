@@ -8,7 +8,7 @@ export async function POST(req) {
     const ReportArray = await req.json();
     // console.log("ramzy",ReportArray);
     // return NextResponse.json(ReportArray, { status: 200 });
-    
+
     // return NextResponse.json(compactJson, { status: 200 });
     // Validate OpenAPI specification
     if (ReportArray.length === 0) {
@@ -19,7 +19,9 @@ export async function POST(req) {
     }
     // return NextResponse.json(ReportArray, { status: 200 });
     // Make the array a string
-    const TestCasesData = JSON.stringify(ReportArray).replaceAll("[", "").replaceAll("]", "");
+    const TestCasesData = JSON.stringify(ReportArray)
+      .replaceAll("[", "")
+      .replaceAll("]", "");
     // console.log("safnas", JSON.parse(TestCasesData));
     // return NextResponse.json(JSON.parse(TestCasesData), { status: 200 });
     // Call the Groq service to generate test cases

@@ -1,4 +1,5 @@
 // pages/api/groq.js
+// app/api/generate-tests/route.js
 import { NextResponse } from "next/server";
 import { getGroqChatCompletion } from "../../../services/groqService.js";
 
@@ -9,7 +10,7 @@ export async function POST(req) {
     const compactJson = JSON.stringify(openApiSpec).replaceAll('"', "");
     // return NextResponse.json(compactJson, { status: 200 });
     // Validate OpenAPI specification
-    
+
     if (!openApiSpec || !openApiSpec.paths) {
       return NextResponse.json(
         { error: "Valid OpenAPI Specification JSON is required" },
@@ -29,7 +30,7 @@ export async function POST(req) {
         }));
       })
       .flat();
-      // return NextResponse.json(endpoints, { status: 200 });
+    // return NextResponse.json(endpoints, { status: 200 });
     // Call the Groq service to generate test cases
     const testCases = await getGroqChatCompletion(endpoints);
 
